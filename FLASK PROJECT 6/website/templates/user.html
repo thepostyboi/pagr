@@ -1,0 +1,59 @@
+{% extends "listing.html" %}
+{% block title %}user {{userid}}{% endblock %}
+
+{% block header %}
+  {% if not foreign_profile %}
+    <h1>Your Profile:</h1>
+    {% if profile_pictures_ %}
+      <img src="{{ url_for('static', filename='PROFILEPICS/' + profile_pictures_.filename) }}" width = 100, height = 100>
+      <br></br>
+    {% endif %}
+    <a href = "/profile_picture_upload">upload profile picture</a>
+    <p><a href = "/logout">logout</a></p>
+  {% else %}
+    <h1>Profile: {{userid}}</h1>
+    {% if current_user.is_authenticated %}
+      {% if current_user.admin == 1 %}
+        <p>banned: {{user.banned}}, <a href = "/ban/{{user.id}}">BAN/UNBAN THIS USER</a></p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if profile_pictures_ %}
+    {% if foreign_profile %}
+      <img src="{{ url_for('static', filename='PROFILEPICS/' + profile_pictures_.filename) }}" width = 100, height = 100>
+    {% endif %}
+  {% endif %}
+  <p>email: {{user.email}}</p>
+  <p>username: {{user.username}}</p>
+  <p>date created: {{user.date_created}}</p>
+  <p>DANGER rating : {{the_rating}}</p>
+  <p>Incoming reports:</p>
+  <ul>
+  {% for i in Reports.query.filter_by(reported_user_id=userid).all() %}
+    <li><a href = "/user/{{i.reporter_user_id}}">ID {{i.reporter_user_id}}</a><a>: {{i.report}}</a></li>
+  {% endfor %}
+  </ul>
+  <p>Outgoing reports:</p>
+  <ul>
+  {% for i in Reports.query.filter_by(reporter_user_id=userid).all() %}
+    <li><a href = "/user/{{i.reported_user_id}}">Reported user ID {{i.reported_user_id}}</a><a>: {{i.report}}</a></li>
+  {% endfor %}
+  </ul>
+{% if foreign_profile %}
+  <a href = "/report/{{userid}}">Report this user</a>
+  {% if current_user.is_authenticated %}
+  <p>Give this user a DANGER rating, 1 being the least dangerous and 5 being the most</p>
+    <form action="/user/{{userid}}" method="POST">
+      <input type="number" id="form_rating" name="form_rating" min="1" max="5">
+      <input type="submit">
+    </form>
+  <br></br>
+  {% else %}
+    <p>Login to give DANGER rating</p>
+  {% endif %}
+
+{% endif %}
+<p class="solid" style="border-style: solid;"></p>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "listing.html" %}
+{% block title %}Home{% endblock %}
+{% block header %}
+<br></br>
+<form class="d-flex" method="POST" > <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" id="search" name="search"> <button class="btn btn-primary" type="submit">Search</button> </form>
+</br>
+<!--
+<marquee behavior="scroll" direction="left" scrollamount="14">
+{% for stocks in stockslist %}
+  <a style="font-size:300%;">{{stocks[0]}}</a>
+  {% if stocks[1][0] == "-" %}
+    <a style="color:red; font-size:300%;" >{{stocks[1]}}</a>
+  {% else %}
+    <a style="color:green; font-size:300%;" >{{stocks[1][1:]}}</a>
+  {% endif %}
+  <a style="font-size:300%;">,  </a>
+{% endfor %}
+</marquee>
+--->
+
+<!--
+<br></br>
+<div class="dropdown area-menu">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">select region
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/region/South East">South East</a></li>
+    <li><a href="/region/South West">South West</a></li>
+    <li><a href="/region/London">London</a></li>
+    <li><a href="/region/North West">North West</a></li>
+    <li><a href="/region/North East">North East</a></li>
+    <li><a href="/region/East Midlands">East Midlands</a></li>
+    <li><a href="/region/West Midlands">West Midlands</a></li>
+    <li><a href="/region/East of England">East of England</a></li>
+    <li><a href="/region/Yorkshire and The Humber">Yorkshire and The Humber</a></li>
+    <li><a href="/region/None">non England region</a></li>
+  </ul>
+</div>
+<br></br>
+<div class="row justify-content-center">
+  <div role="img" class="floatleft noresize" style="width: 370px; font-size: 85%; line-height: 1; text-align: center; background-color: #ffffff; position: relative;"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/English_regions_2009.svg/370px-English_regions_2009.svg.png" decoding="async" width="370" height="449" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/English_regions_2009.svg/555px-English_regions_2009.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b4/English_regions_2009.svg/740px-English_regions_2009.svg.png 2x" data-file-width="1108" data-file-height="1345">
+  <div style="position:absolute; left:347.35px; top:4.95px"><a href="/about" title="about this map"><img alt="about this map" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/18/Circle-information.svg/20px-Circle-information.svg.png" decoding="async" width="20" height="20" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/18/Circle-information.svg/30px-Circle-information.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/1/18/Circle-information.svg/40px-Circle-information.svg.png 2x" data-file-width="225" data-file-height="225"></a></div>
+  <div style="position:absolute; left:20.6px; top:10px"><a href="/region/None" title="non England region"><br>non England region</a></div>
+  <div style="position:absolute; left:282.6px; top:269.5px"><a href="/region/East of England" title="East of England">East of<br>England</a></div>
+  <div style="position:absolute; left:264.1px; top:317.6px"><a href="/region/London" title="Greater London">London</a></div>
+  <div style="position:absolute; left:227.1px; top:350.9px"><a href="/region/South East" title="South East England">South East</a></div>
+  <div style="position:absolute; left:101.3px; top:362px"><a href="/region/South West" title="South West England">South West</a></div>
+  <div style="position:absolute; left:227.1px; top:214px"><a href="/region/East Midlands" title="East Midlands">East<br>Midlands</a></div>
+  <div style="position:absolute; left:171.6px; top:239.9px"><a href="/region/West Midlands" title="West Midlands (region)">West<br>Midlands</a></div>
+  <div style="position:absolute; left:201.2px; top:132.6px"><a href="/region/Yorkshire and The Humber" title="Yorkshire and the Humber">Yorkshire and<br>the Humber</a></div>
+  <div style="position:absolute; left:186.4px; top:58.6px"><a href="/region/North East" title="North East England">North<br>East</a></div>
+  <div style="position:absolute; left:138.3px; top:101.15px"><a href="/region/North West" title="North West England">North West</a></div>
+  </div>
+</div>
+<br></br>
+
+--->
+
+
+<p class="solid" style="border-style: solid;"></p>
+<style>
+.area-menu {
+                text-align: center;
+            }
+</style>
+
+
+
+{% endblock %}

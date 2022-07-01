@@ -1,0 +1,20 @@
+{% extends "listing.html" %}
+{% block title %}{{page_title}}{% endblock %}
+{% block header %}
+<h1>{{page_title}}</h1>
+<p>{{page_description}}</p>
+{%if page_check %}
+  {% if page_check.removed == 0 %}
+    <p>Created by <a href="/user/{{page_creator.id}}">{{page_creator.username}}</a></p>
+    <a href="/upload_listing/{{Page_id}}">Upload Listing</a>
+    <br>
+    <form class="d-flex" method="POST" > <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" id="search" name="search"> <button class="btn btn-primary" type="submit">Search</button> </form>
+  {% else %}
+    <p>page removed</p>
+  {%endif%}
+
+{%endif%}
+<p class="solid" style="border-style: solid;"></p>
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "listing.html" %}
+{% block title %}page list{% endblock %}
+{% block header %}
+<!--
+<p class="solid" style="border-style: solid;"></p>
+{% for page in pages  %}
+  {% if page.removed == 1 %}
+    <p>{{page.title}}</p>
+  {% else %}
+    <a href="/page/{{page.id}}">{{page.title}}</a>
+  {% endif %}
+  <br>
+{% endfor %}
+-->
+
+
+<br></br>
+<h1>ALL PAGES:</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">title</th>
+      <th scope="col">creator id</th>
+      <th scope="col">date_created</th>
+      <th scope="col">removed</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for page in pages %}
+      <tr>
+        <td>{{page.id}}</td>
+        {% if page.removed == 0 %}
+          <td><a href = "/page/{{page.id}}">{{page.title}}</a></td>
+        {% else %}
+          <td>{{page.title}}</td>
+        {% endif %}
+        <td><a href = "/user/{{page.user_id}}">{{page.user_id}}</a></td>
+        <td>{{page.date_created}}</td>
+        {% if current_user.admin == 1 %}
+          <td><a href = "/removepage/{{page.id}}">{{page.removed}}</a></td>
+        {%else%}
+          <td>{{page.removed}}</td>
+        {%endif%}
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+{% endblock %}

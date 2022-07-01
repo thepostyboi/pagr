@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+
+{% block content %}
+{% block header %}{% endblock %}
+{% for listings in listing  %}
+  {% set typelist = listings.minetype.split('/') %}
+  {% if listings.removed == 0 %}
+    <h1><a href = "/listings/{{listings.id}}">{{listings.title}}</a></h1>
+    <p>OP ID: <a href = "/user/{{listings.user_id}}">{{listings.user_id}}</a></p>
+    <p>page: <a href = "/page/{{listings.Page_id}}">{{Page.query.filter_by(id=listings.Page_id).first().title}}</a></p>
+
+    {% if listings.file != "" %}
+      <section class="col-md-3 col-sm-6" >
+
+        {% if typelist[0] == "image" %}
+          <img src="{{ url_for('static', filename='uploads/' + listings.file) }}" width = 1000>
+        {% endif %}
+
+        {% if typelist[0] == "audio" or typelist[0] == "video" %}
+          <video src="{{ url_for('static', filename='uploads/' + listings.file) }}" width = 1000 controls>
+        {% endif %}
+      </section>
+      <a href="{{ url_for('static', filename='uploads/' + listings.file) }}" style="absolute: 600;" download>{{ listings.file }}</a>
+    {% endif %}
+    <p>date uploaded: {{listings.date_created}}</p>
+    <p>description: {{listings.description|urlize}}</p>
+    {% if current_user.id in listings.Likes|map(attribute="user_id")|list %}
+      <a href="/like/{{listings.id}}">unlike {{listings.Likes|length}}</a>
+    {% else %}
+      <a href="/like/{{listings.id}}">like {{listings.Likes|length}}</a>
+    {% endif %}
+  {% else %}
+    <h1><a href = "/listings/{{listings.id}}">POST REMOVED</a></h1>
+    <p>OP ID: <a href = "/user/{{listings.user_id}}">{{listings.user_id}}</a></p>
+    <p>date uploaded: {{listings.date_created}}</p>
+  {% endif %}
+  {% if current_user.is_authenticated %}
+    {% if current_user.admin == 1 %}
+      <p><a href="/remove/{{ listings.id }}">REMOVE/UNREMOVE POST</a></p>
+    {% endif %}
+  {% endif %}
+  <p class="solid" style="border-style: solid;"></p>
+{% endfor %}
+
+{% block footer %}{% endblock %}
+
+{% endblock %}

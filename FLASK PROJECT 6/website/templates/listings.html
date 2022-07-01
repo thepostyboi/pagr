@@ -1,0 +1,32 @@
+{% extends "listing.html" %}
+{% block title %}{{listing[0].id}}{% endblock %}
+{% block footer %}
+{% if current_user.is_authenticated %}
+  <form method="POST">
+    <textarea name="cmm" id = "cmm" class="form-control"></textarea>
+    <div align="align">
+      <button type="submit" class="btn btn-primary">Submit:</button>
+    </div>
+  </form>
+{% else %}
+  <p>login to comment</p>
+{% endif %}
+<p class="solid" style="border-style: solid;"></p>
+
+
+
+
+{% for cm in flisting.Comments %}
+  {% if cm.removed == 1 %}
+    <p><a href="/user/{{ cm.user_id }}">ID {{ cm.user_id }}</a>: COMMENT REMOVED</p>
+  {% else %}
+    <p><a href="/user/{{ cm.user_id }}">ID {{ cm.user_id }}</a>: {{ cm.text|urlize }}</p>
+  {% endif %}
+  {% if current_user.admin == 1 %}
+    <a href="/removecomment/{{ cm.id }}">REMOVE/UNREMOVE COMMENT</a>
+  {% endif %}
+  <p class="solid" style="border-style: solid;"></p>
+{% endfor %}
+
+
+{% endblock %}
